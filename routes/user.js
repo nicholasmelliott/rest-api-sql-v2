@@ -3,10 +3,10 @@ const router = express.Router();
 const User = require('../models').User;
 
 // Get users
-router.get('/users', function(req, res, next) {
-    User.findAll().then(function(users){
+router.get('/', (req, res) => {
+    User.findAll().then( users =>{
       res.json(users);
     });
   });
 
-  module.exports = router;
+module.exports = router;

@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models').User;
+const Course = require('../models').Course;
 
-// // Get users
-// router.get('/users', function(req, res, next) {
-//     User.findAll({order: [["title", "ASC"]]}).then(function(users){
-//       res.json(users);
-//     });
-//   });
+// Get courses
+router.get('/', function(req, res, next) {
+    Course.findAll().then(function(courses){
+      res.json(courses);
+    });
+  });
 
   module.exports = router;

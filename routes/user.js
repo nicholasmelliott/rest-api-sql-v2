@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models').User;
 const auth = require('basic-auth');
 const bcryptjs = require('bcryptjs');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 const authenticateUser = async (req, res, next) => {
   let message = null;
@@ -76,9 +76,8 @@ router.post('/', [
     //encrypt user's password then create user
     user.password = bcryptjs.hashSync(user.password);
     User.create(user).then(() => {
-      res.redirect("/");
+      res.status(201).end();
     });
-    res.status(201).end();
   }
 });
 

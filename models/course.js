@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Course.belongsTo(models.User, { 
+        as: 'user',
         foreignKey: {
           fieldName: 'userId' ,
           allowNull: false
@@ -39,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Course',
-    timestamps: false
+    timestamps: true
   });
   return Course;
 };

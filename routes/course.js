@@ -18,7 +18,7 @@ const validate = [
     check('description')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage("Please provide a value for 'description'."),
-  ]
+  ];
 
 // Get all courses
 router.get('/', (req, res, next) => {

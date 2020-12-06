@@ -5,13 +5,8 @@ const authenticateUser = require('../authenticate');
 const bcryptjs = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 
-// Get authenticated user
-router.get('/', authenticateUser, (req, res) => {
-  res.json(req.currentUser[0].dataValues);
-});
-
-// Create new user
-router.post('/', [
+//user validation
+const validate = [
   check('firstName')
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage("Please provide a value for 'firstName'."),
@@ -40,8 +35,15 @@ router.post('/', [
   check('password')
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage("Please provide a value for 'password'.")
-], (req, res) => {
+];
 
+// Get authenticated user
+router.get('/', authenticateUser, (req, res) => {
+  res.json(req.currentUser[0].dataValues);
+});
+
+// Create new user
+router.post('/', validate , (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {

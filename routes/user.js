@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models').User;
 const authenticateUser = require('../authenticate');
+const bcryptjs = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 
 // Get authenticated user
@@ -19,11 +20,27 @@ router.post('/', [
     .withMessage("Please provide a value for 'lastName'."),
   check('emailAddress')
     .exists({ checkNull: true, checkFalsy: true })
-    .withMessage("Please provide a value for 'emailAddress'."),
+    .withMessage("Please provide a value for 'emailAddress'.")
+    .isEmail()
+    .withMessage("Please provide a valid email (ex. name@example.com)")
+    //validates if email is already in use
+    .custom(value => {
+      console.log(value);
+      return User.findOne({
+        where:{
+          emailAddress: value
+        }
+      }).then(user => {
+        if(user){
+          return Promise.reject(); 
+        }
+      });
+    })
+    .withMessage("Email already in use. Please provide a different email."),
   check('password')
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage("Please provide a value for 'password'.")
-],(req, res) => {
+], (req, res) => {
 
   const errors = validationResult(req);
 

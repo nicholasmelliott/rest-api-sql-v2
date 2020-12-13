@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../models').Course;
 const User = require('../models').User;
-const authenticateUser = require('../authenticate');
+const authenticateUser = require('../auth/authCreds');
+const authCourseOwner = require('../auth/authOwner');
 const { check, validationResult } = require('express-validator');
+
 const courseAttr =  ['id', 'userId', 'title', 'description', 'estimatedTime', 'materialsNeeded'];
 const userAttr = ['firstName', 'lastName', 'emailAddress'];
 
+
 //validator
 const validate = [
-    check('userId')
-      .exists({ checkNull: true, checkFalsy: true })
-      .withMessage("Please provide your user id for 'userId."),
     check('title')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage("Please provide a value for 'title'."),
     check('description')
       .exists({ checkNull: true, checkFalsy: true })
-      .withMessage("Please provide a value for 'description'."),
+      .withMessage("Please provide a value for 'description'.")
   ];
 
 // Get all courses
@@ -50,7 +50,8 @@ router.post('/', authenticateUser, validate ,(req, res) => {
     const errorMessages = errors.array().map(error => error.msg);
     res.status(400).json({ errors: errorMessages });
   } else {
-    console.log(req.body);
+    //Sets userId to person creating course
+    req.body.userId = req.currentUser[0].dataValues.id;
     Course.create(req.body).then(() => {
       res.status(201).end();
     });
@@ -58,7 +59,7 @@ router.post('/', authenticateUser, validate ,(req, res) => {
 });
 
 // Update course
-router.put('/:id', authenticateUser, validate, (req, res) => {
+router.put('/:id', authenticateUser, authCourseOwner, validate, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map(error => error.msg);
@@ -71,7 +72,7 @@ router.put('/:id', authenticateUser, validate, (req, res) => {
 });
 
 // Delete course
-router.delete('/:id', authenticateUser, (req, res) => {
+router.delete('/:id', authenticateUser, authCourseOwner, (req, res) => {
   Course.destroy({where: {id: req.params.id}}).then(() => {
   res.status(204).end();
   });

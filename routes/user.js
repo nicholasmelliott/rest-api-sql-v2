@@ -16,6 +16,7 @@ const validate = [
   check('emailAddress')
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage("Please provide a value for 'emailAddress'.")
+    .bail()
     .isEmail()
     .withMessage("Please provide a valid email (ex. name@example.com)")
     //validates if email is already in use

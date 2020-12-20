@@ -55,13 +55,19 @@ router.get('/:id', (req, res, next) => {
 // Create new course
 router.post('/', authenticateUser, validate ,(req, res) => {
   const errors = validationResult(req);
+  let courseNum;
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map(error => error.msg);
     res.status(400).json({ errors: errorMessages });
   } else {
     //Sets userId to person creating course
     req.body.userId = req.currentUser[0].dataValues.id;
-    Course.create(req.body).then(() => {
+    console.log(req.body);
+    Course.create(req.body).then((res) => {
+      //retreiving auto-incremented course id from database
+      courseNum = res.dataValues.id;
+    }).then(() => {
+      res.setHeader("Location", `api/courses/${courseNum}`)
       res.status(201).end();
     });
   }

@@ -22,7 +22,16 @@ const validate = [
 
 // Get all courses
 router.get('/', (req, res, next) => {
-    Course.findAll({attributes: courseAttr}).then((courses) => {
+    Course.findAll({
+      attributes: courseAttr,
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: userAttr
+        }
+      ]
+    }).then((courses) => {
       res.json(courses);
     });
   });

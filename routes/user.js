@@ -60,6 +60,7 @@ router.post('/', validate , (req, res) => {
     //encrypt user's password then create user
     user.password = bcryptjs.hashSync(user.password);
     User.create(user).then(() => {
+      res.setHeader("Location", "/");
       res.status(201).end();
     });
   }

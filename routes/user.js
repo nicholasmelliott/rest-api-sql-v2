@@ -39,7 +39,13 @@ const validate = [
 
 // Get authenticated user
 router.get('/', authenticateUser, (req, res) => {
-  res.json(req.currentUser[0].dataValues);
+  res.json(
+    { 
+      "firstName": req.currentUser[0].dataValues.firstName,
+      "lastName": req.currentUser[0].dataValues.lastName,
+      "emailAddress": req.currentUser[0].dataValues.emailAddress
+    }
+  );
 });
 
 // Create new user

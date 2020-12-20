@@ -2,7 +2,6 @@ const User = require('../models').User;
 const auth = require('basic-auth');
 const bcryptjs = require('bcryptjs');
 
-
 const authenticateUser = async (req, res, next) => {
     let message = null;
     // Parse the user's credentials from the Authorization header.

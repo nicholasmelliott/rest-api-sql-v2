@@ -52,7 +52,7 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-// Create new course
+// Creates new course
 router.post('/', authenticateUser, validate ,(req, res) => {
   const errors = validationResult(req);
   let courseNum;
@@ -62,7 +62,6 @@ router.post('/', authenticateUser, validate ,(req, res) => {
   } else {
     //Sets userId to person creating course
     req.body.userId = req.currentUser[0].dataValues.id;
-    console.log(req.body);
     Course.create(req.body).then((res) => {
       //retreiving auto-incremented course id from database
       courseNum = res.dataValues.id;

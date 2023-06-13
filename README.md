@@ -51,7 +51,7 @@ This is a REST API project that allows users to administer a school database con
 
 ### Courses
 
-![Animated GIF](./public/images/RestApiGetCourses.gif)
+![Animated GIF](./public/images/RestApiGetCoursesExample.gif)
 
 #### Get All Courses
 

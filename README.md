@@ -123,6 +123,8 @@ This is a REST API project that allows users to administer a school database con
   - `204 No Content`: The course is updated successfully.
   - `400 Bad Request`: If there are validation errors in the request body.
 
+![Animated GIF](./public/images/RestApiUpdateCourseExample.gif)
+
 #### Delete Course
 
 - **URL:** `/courses/:id`
@@ -132,6 +134,8 @@ This is a REST API project that allows users to administer a school database con
   - `id` (number): The ID of the course.
 - **Response:**
   - `204 No Content`: The course is deleted successfully.
+
+![Animated GIF](./public/images/RestApiDeleteCourseExample.gif)
 
 ## Validation
 

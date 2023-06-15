@@ -49,6 +49,8 @@ This is a REST API project that allows users to administer a school database con
   - `201 Created`: The user is created successfully.
   - `400 Bad Request`: If there are validation errors in the request body.
 
+![Animated GIF](./public/images/RestApiCreateAndGetUserExample.gif)
+
 ### Courses
 
 #### Get All Courses

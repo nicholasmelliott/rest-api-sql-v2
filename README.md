@@ -51,8 +51,6 @@ This is a REST API project that allows users to administer a school database con
 
 ### Courses
 
-![Animated GIF](./public/images/RestApiGetCoursesExample.gif)
-
 #### Get All Courses
 
 - **URL:** `/courses`
@@ -90,6 +88,8 @@ This is a REST API project that allows users to administer a school database con
     - `emailAddress` (string): The email address of the
 
  user.
+ 
+ ![Animated GIF](./public/images/RestApiGetCoursesExample.gif)
 
 #### Create Course
 
@@ -104,6 +104,8 @@ This is a REST API project that allows users to administer a school database con
 - **Response:**
   - `201 Created`: The course is created successfully.
   - `400 Bad Request`: If there are validation errors in the request body.
+
+![Animated GIF](./public/images/RestApiCreateCourseExample.gif)
 
 #### Update Course
 

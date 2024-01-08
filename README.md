@@ -2,25 +2,6 @@
 
 This is a REST API project that allows users to administer a school database containing information about courses. The project is built using Node.js, Express, and Sequelize ORM.
 
-## Installation
-
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Install the dependencies by running the following command:
-
-   ```
-   npm install
-   ```
-
-4. Configure the database connection settings in the project's configuration file.
-5. Start the server by running the following command:
-
-   ```
-   npm start
-   ```
-
-   The server will start running on `http://localhost:3000` by default.
-
 ## API Endpoints
 
 ### Users
